@@ -503,10 +503,12 @@ html {
     }
 
     .projects-grid {
+        display: grid;
         grid-template-columns: 1fr;
         gap: 1rem;
     }
    .contact-content {
+        display: grid;
         grid-template-columns: 1fr;
         gap: 2rem;
     }
@@ -535,6 +537,7 @@ html {
         padding: 100px 15px 20px;
     }
      .projects-grid {
+        display: grid;
         grid-template-columns: 1fr;
         gap: 1rem;
     }
