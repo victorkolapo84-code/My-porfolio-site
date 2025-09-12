@@ -382,7 +382,7 @@ html {
     padding: 2rem 0;
 }
 
-/* Animations 
+/* Animations */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -393,22 +393,21 @@ html {
         transform: translateY(0);
     }
 }
-*/
-/* Alternative Animation Code */
-@keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+
+/* Applying the animation with a staggered effect */
+.hero-title {
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.2s forwards;
 }
 
-.animate-me {
-    opacity: 0; /* Ensures the element is hidden before animation */
-    animation: fadeInUp 1s ease-out 0.5s forwards; /* 0.5s delay added */
+.hero-subtitle {
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.4s forwards;
+}
+
+.hero-description {
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.6s forwards;
 }
 
 
