@@ -145,27 +145,52 @@ function initContactForm() {
     const contactForm = document.querySelector('.contact-form');
     if (!contactForm) return;
 
-    contactForm.addEventListener('submit', function (e) {
+    contactForm.addEventListener('submit', async function (e) {
         e.preventDefault();
 
-        const name = this.querySelector('input[name="name"]').value.trim();
-        const email = this.querySelector('input[name="email"]').value.trim();
-        const message = this.querySelector('textarea[name="message"]').value.trim();
+        const nameField = this.querySelector('input[name="name"]');
+        const emailField = this.querySelector('input[name="email"]');
+        const messageField = this.querySelector('textarea[name="message"]');
+
+        if (!nameField || !emailField || !messageField) {
+            showNotification('Form fields are missing in HTML', 'error');
+            return;
+        }
+
+        const name = nameField.value.trim();
+        const email = emailField.value.trim();
+        const message = messageField.value.trim();
 
         if (!name || !email || !message) {
-            alert('Please fill in all fields');
+            showNotification('Please fill in all fields', 'error');
             return;
         }
 
         if (!isValidEmail(email)) {
-            alert('Please enter a valid email address');
+            showNotification('Please enter a valid email address', 'error');
             return;
         }
 
-        // Send message via EmailJS
-        emailjs.sendForm('service_lwuj9e5', 'template_8fp22u3', this)
-            .then(() => alert('Message sent!'))
-            .catch(err => alert('Failed to send. Error: ' + JSON.stringify(err)));
+        // Disable button to prevent multiple submissions
+        const submitBtn = this.querySelector('button[type="submit"]');
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Sending...";
+        }
+
+        try {
+            await emailjs.sendForm('service_lwuj9e5', 'template_8fp22u3', this);
+            showNotification('✅ Message sent successfully!', 'success');
+            contactForm.reset();
+        } catch (error) {
+            console.error("EmailJS Error:", error);
+            showNotification('❌ Failed to send message. Try again later.', 'error');
+        } finally {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Send Message";
+            }
+        }
     });
 }
 
@@ -174,6 +199,41 @@ function isValidEmail(email) {
     return emailRegex.test(email);
 }
 
+function showNotification(message, type = 'info') {
+    // Remove any existing notifications
+    const existingNotification = document.querySelector('.notification');
+    if (existingNotification) existingNotification.remove();
+
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        z-index: 10000;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        max-width: 300px;
+        word-wrap: break-word;
+    `;
+
+    document.body.appendChild(notification);
+
+    // Animate in
+    setTimeout(() => notification.style.transform = 'translateX(0)', 10);
+
+    // Auto remove after 4 seconds
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => notification.remove(), 300);
+    }, 4000);
+}
 /* -----------------------
    TYPING EFFECT
 ----------------------- */
