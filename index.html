@@ -190,17 +190,26 @@
                     </div>
                 </div>
                 <form class="contact-form">
-                    <div class="form-group">
-                        <input type="text" id="name" name="name" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                </form>
+                    <form action="https://formsubmit.co/lifeboostblog@gmail.com" method="POST" class="contact-form">
+  <div class="form-group">
+    <input type="text" id="name" name="name" placeholder="Your Name" required>
+  </div>
+  <div class="form-group">
+    <input type="email" id="email" name="email" placeholder="Your Email" required>
+  </div>
+  <div class="form-group">
+    <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+  </div>
+
+  <!-- Optional hidden fields -->
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_next" value="https://kpzblogwebsite.netlify.app/thank-you.html">
+  <input type="hidden" name="_subject" value="New Message from LifeBoost Contact Form">
+
+  <button type="submit" class="btn btn-primary">Send Message</button>
+</form>
+
+
             </div>
         </div>
     </section>
