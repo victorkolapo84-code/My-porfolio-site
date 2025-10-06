@@ -106,14 +106,15 @@ html {
 }
 
 .hero-subtitle {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    opacity: 0;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    opacity: 0; 
     animation: fadeInUp 1s ease 0.4s forwards;
+    font-weight: bolder;
 }
 
 .hero-description {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     margin-bottom: 2rem;
     opacity: 0;
     animation: fadeInUp 1s ease 0.6s forwards;
@@ -249,6 +250,7 @@ html {
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
 }
 
 .project-card:hover {
@@ -257,12 +259,31 @@ html {
 }
 
 .project-image {
+    position: relative;
     height: 200px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    overflow: hidden;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Dark overlay for text readability */
+.project-image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
 
 .project-placeholder {
     font-size: 4rem;
@@ -313,6 +334,8 @@ html {
     text-decoration: underline;
 }
 
+
+
 /* Contact Section */
 .contact {
     padding: 80px 0;
@@ -329,7 +352,8 @@ html {
 
 .contact-info h3 {
     margin-bottom: 1rem;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    text-align: centre;
 }
 
 .contact-methods {
@@ -341,10 +365,19 @@ html {
     align-items: center;
     gap: 1rem;
     margin-bottom: 1rem;
+    
 }
 
+.contact-method a {
+  text-decoration: none;
+  color: #25D366; /* WhatsApp green */
+  font-weight: 500;
+}
+
+
+
 .contact-icon {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
 }
 
 .contact-form {
@@ -394,6 +427,10 @@ html {
     }
 }
 
+.notification {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .nav-menu {
